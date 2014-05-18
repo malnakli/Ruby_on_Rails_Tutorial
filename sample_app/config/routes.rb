@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  get 'users/new'
+  resources :users
+  
+ 
   match '/signup',  to: 'users#new',            via: 'get'
 
- # root "static_pages#index"
-    get "static_pages" => "static_pages#index"
-    get "static_pages/home"
-    get "static_pages/help"
+    root "static_pages#index"
+  #get "static_pages" => "static_pages#index"
+   # get "static_pages/home"
+    #get "static_pages/help"
+    match '/help',   to: 'static_pages#help',   via: 'get'
     match '/about',   to: 'static_pages#about',   via: 'get'
     get "static_pages/contact"
   # The priority is based upon order of creation: first created -> highest priority.
