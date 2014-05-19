@@ -33,7 +33,9 @@ module SessionsHelper
          @current_user ||= User.find_by(remember_token: remember_token) # ||= (“or equals”) means that assigning to a variable if it’s nil but otherwise leaving it alone
       end
       
-      
+      def current_user?(user)
+         user == current_user
+       end
       #change the user’s remember token in the database (in case the cookie has been stolen
       def sign_out
           current_user.update_attribute(:remember_token,
@@ -41,4 +43,15 @@ module SessionsHelper
           cookies.delete(:remember_token)
           self.current_user = nil
         end
+        
+        
+        #o store the location of the requested page somewhere, and then redirect to that location instead
+        def redirect_back_or(default)
+           redirect_to(session[:return_to] || default)
+           session.delete(:return_to)
+         end
+
+         def store_location
+           session[:return_to] = request.url if request.get? # save to return_to session  only for a GET request
+         end
 end
