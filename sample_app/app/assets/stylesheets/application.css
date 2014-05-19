@@ -12,4 +12,10 @@
  *
  *= require_tree .
  *= require_self
+
  */
+
+/* not used, add = to included. 
+* require bootstrap.min
+* require bootstrap-theme.min
+*/
