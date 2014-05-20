@@ -2,10 +2,29 @@
 <div class="row">
   <aside class="span4">
     <section>
-<h1>
-	<%= gravatar_for @user %>
-	<%= @user.name %>
-</h1>
-</section>
+		<h1>
+			<%= gravatar_for @user %>
+			<%= @user.name %>
+		</h1>
+	</section>
   </aside>
+ 
+  <div class="span8">
+    
+		 <% if @user.microposts.any? %>
+	  
+        <h3>Microposts (<%= @user.microposts.count %>)</h3>
+        <ol class="microposts">
+          <%= render @microposts %>
+        </ol>
+		<!--
+		 since we are still in the Users controller but want to paginate microposts instead, we pass an explicit @microposts
+			variable to will_paginate. Of course, this means that we will have to define such a variable in the user show action
+		-->
+        <%= will_paginate @microposts %>
+		
+	
+      <% end %>
+		
+    </div>
 </div>

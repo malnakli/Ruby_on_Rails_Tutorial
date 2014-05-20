@@ -13,7 +13,7 @@ namespace :db do
     # for an invalid user rather than returning false. This noisier construction 
     # makes debugging easier by avoiding silent errors.
    
-    User.create!(name: "Mohammed",
+    User.create!(name: "Mohammed Alnakli",
                  email: "hah_m14@yahoo.com",
                  password: "123456",
                  password_confirmation: "123456",
@@ -27,5 +27,13 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
+    
+    users = User.limit(6)
+        50.times do
+          content = Faker::Lorem.sentence(5)
+         users.each { |user| user.microposts.create!(content: content) }
+        end
+        
+        
   end
 end

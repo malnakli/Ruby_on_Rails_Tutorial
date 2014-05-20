@@ -36,6 +36,18 @@ module SessionsHelper
       def current_user?(user)
          user == current_user
        end
+       def signed_in_user
+       
+         unless signed_in?
+           store_location
+           flash[:notice] = "Please sign in."
+         
+           redirect_to signin_url
+         end
+         # the following code is similar to the above one 
+
+           #  redirect_to signin_url, notice: "Please sign in." unless signed_in?
+      end
       #change the user’s remember token in the database (in case the cookie has been stolen
       def sign_out
           current_user.update_attribute(:remember_token,

@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   
   def show
      @user = User.find(params[:id])
+     @microposts = @user.microposts.paginate(page: params[:page])
   end 
   
   def create
@@ -71,18 +72,7 @@ class UsersController < ApplicationController
                                     :password_confirmation)
      end
      
-     def signed_in_user
-       
-       unless signed_in?
-         store_location
-         flash[:notice] = "Please sign in."
-         
-         redirect_to signin_url
-       end
-       # the following code is similar to the above one 
-
-         #  redirect_to signin_url, notice: "Please sign in." unless signed_in?
-         end
+     
          
         def correct_user
         # since this code will call when a user do edit or update action, these action will have params[:id] pass to.

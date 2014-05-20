@@ -1,4 +1,7 @@
-<% if @user.errors.any? %>
+
+
+<!-- The following code can have any type of object @user or @micropost-->
+<% if object.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
 		<% #pluralize takes an integer argument and then returns the number 
@@ -6,13 +9,13 @@
 		# Underlying this method is a powerful inflector that knows how 
 		# to pluralize a large number of words, including many with irregular plurals:
 		%>
-		
-      The form contains <%= pluralize(@user.errors.count, "error") %>.
+      The form contains <%= pluralize(object.errors.count, "error") %>.
     </div>
     <ul>
-    <% @user.errors.full_messages.each do |msg| %>
+    <% object.errors.full_messages.each do |msg| %>
       <li>* <%= msg %></li>
     <% end %>
     </ul>
   </div>
 <% end %>
+

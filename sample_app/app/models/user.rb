@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  
+  # dependent: :destroy  arranges for the dependent microposts to be destroyed when the user itself is destroyed
+  has_many :microposts , dependent: :destroy
+    
   # validation Users
   
     before_create :create_remember_token
@@ -24,6 +26,17 @@ class User < ActiveRecord::Base
          Digest::SHA1.hexdigest(token.to_s)
        end
      
+       def feed
+           # This is preliminary. See "Following users" for the full implementation.
+           #The question mark
+           # ensures that id is properly escaped before being included in the underlying SQL query, thereby avoiding
+           # a serious security hole called SQL injection. The id attribute here is just an integer
+           # (i.e., self.id, the unique ID of the user), so there is no danger in this case,
+           # but always escaping variables injected into SQL statements is a good habit to cultivate.
+           
+           Micropost.where("user_id = ?", id) # is equal to "self.microposts"
+         end
+           
      private
      
        def create_remember_token

@@ -7,7 +7,11 @@
 	  # hen constructing a form using form_for(@user), Rails uses POST if @user.new_record? is true and PATCH if it is false.
 	  %>
     <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
+	<!--	
+		To pass the object to the partial, we use a hash with value equal to the object and key equal 
+		to the desired name of the variable in the partial
+	-->
+      <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :name %>
       <%= f.text_field :name %>
