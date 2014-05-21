@@ -1,0 +1,6 @@
+<!-- add remote: true tell rails that the form should use Ajax instead of normal html form.-->
+<%= form_for(current_user.relationships.build(followed_id: @user.id), remote: true) do |f| %>
+<% # hide the id from displaying because it is used on the form when sending a relationships%>
+  <div><%= f.hidden_field :followed_id %></div> 
+  <%= f.submit "Follow", class: "btn btn-large btn-primary" %>
+<% end %>
